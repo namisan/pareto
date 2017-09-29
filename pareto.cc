@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <unistd.h>
 #include "Datapoint.h"
 #include "ParetoAlgo.h"
 #include "StablesortAlgo.h"
@@ -34,7 +35,7 @@ int main(int argc, char* argv[]){
 
   /////////////////////////////////
   // Command line parameters
-  std::vector< std::pair<char*,int> > files; 
+  std::vector< std::pair<char*,int> > files;
   std::string algoName; // name of specific paretro algorithm to use
 
   int c;
@@ -100,7 +101,7 @@ int main(int argc, char* argv[]){
       if (id != idmax_file1){
 	std::cerr << "[error] unequal #datapoints in " << files[0].first << " vs " << files[f].first << std::endl;
 	exit(1);
-	  
+
       }
     }
   }
@@ -133,7 +134,7 @@ int main(int argc, char* argv[]){
 
 
   ////////////////////////////////////
-  // Compute the Pareto Frontier! 
+  // Compute the Pareto Frontier!
   int numPareto = algo->computeFrontier(dataset);
   std::cerr << "#pareto: " << numPareto << " of " << dataset.size() << " total, by the " << algoName << " algorithm " << std::endl;
   for (size_t d=0; d<dataset.size(); ++d){

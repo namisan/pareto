@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from __future__ import print_function
 import random
 import subprocess
 import pareto
@@ -10,7 +10,7 @@ K=4
 cmd=""
 raw_vectors=[]
 for k in range(K):
-    with open("/tmp/pareto.%d"%k,"w") as f:
+    with open("/tmp/pareto.%d"%k, "w") as f:
         cmd+="-l /tmp/pareto.%d "%k
         vec=[]
         for n in range(N):
@@ -28,8 +28,8 @@ dataset=pareto.create_dataset(raw_vectors)
 pareto.nondominated_sort(dataset)
 for n,s in enumerate(dataset):
     if s.paretoStatus != c_results[n]:
-        print "Discrepancy!"
-        print n,s, s.paretoStatus, c_results[n]
-print "Test Done"
+        print('Discrepancy!')
+        print('{}\t{}\t{}\t{}'.format(n,s, s.paretoStatus, c_results[n]))
+print('Test Done')
 
-subprocess.call("rm /tmp/pareto.*",shell=True)
+subprocess.call('rm /tmp/pareto.*',shell=True)
